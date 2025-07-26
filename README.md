@@ -43,8 +43,7 @@ A simple full-stack web application built using **Python (Django)** that allows 
 |------------|---------------------------|
 | Python     | Backend logic (Django)    |
 | HTML, CSS  | Structure & Styling       |
-| Bootstrap  | UI/UX Framework           |
-| JavaScript | (Optional interactivity)  |
+| Bootstrap  | UI/UX Framework           | 
 | MySQL      | Database (with raw SQL)   |
 
 ---
