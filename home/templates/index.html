@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block start %}
+
+
+<p>
+    this is index page
+</p>
+
+    <a href="about">About</a>
+|| 
+<a href="contact">contact</a>
+    <h1>The people list is from the backend django sever</h1>
+    
+    <table class="container table table-striped mt-5">
+      <thead>
+        <tr>
+          <th scope="col">si.no</th>
+          <th scope="col">name</th>
+          <th scope="col">age</th>
+          <th scope="col">Can vote?</th>
+          
+          
+        </tr>
+      </thead>
+      <tbody>
+        {% for person in peoples %}
+        <tr>
+          <th scope="row">{{forloop.counter}}</th>
+          <td>{{person.name}}</td>
+          <td>{{person.age}}</td>
+          <td>
+            {% if person.age >= 18 %}
+            👍
+            {% else %}
+            👎
+          {%endif%}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+</table>
+
+{% endblock %}

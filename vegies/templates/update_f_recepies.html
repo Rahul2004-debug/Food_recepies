@@ -1,0 +1,83 @@
+
+{% extends "base.html" %}
+{% block start %}
+{% load static %}
+
+<style >
+     body {
+             background-image: url("{% static 'recepie/bgimage.jpg' %}");
+            background-size: cover;
+            background-repeat: repeat;
+            background-position: center;
+           
+        }
+    .card
+    {
+    background-color: rgba(255, 255, 255, 0.95);  /* or 0.85 for more transparency */
+    border-radius: 15px;
+       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+    .btn-custom {
+    background: linear-gradient(45deg, #ff416c, #ff4b2b);
+    color: white;
+    border: none;
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+}
+.btn-custom:hover {
+    opacity: 0.9;
+}
+
+ table {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    background: rgba(255, 255, 255, 0.55); /* White with 75% opacity */
+  }
+
+  .transparent-table-card {
+    background-color: rgba(255, 255, 255, 0.95);  /* White with 95% opacity */
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    padding: 20px;
+    margin-top: 30px;
+  }
+
+
+
+  tbody tr:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+  }
+
+  form:hover {
+  transform: scale(1.03); /* Slightly enlarges the form */
+  transition: transform 1s ease; /* Smooth animation */
+}
+
+</style>
+<div class="container">
+   <form method="post" enctype="multipart/form-data" class="col-6 mx-auto card mt-5 p-3 shadow-lg">
+    {% csrf_token %}
+    <h2 class="text-center text-danger">Update Food_recepies</h2>
+    <hr>
+    <div class="mb-3">
+        <label for="recepie_name" class="form-label text-danger">Recepie_name</label>
+        <input type="text" name="recepies_name" value="{{recepie.recepies_name}}" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label for="recepie_description" class="form-label text-danger">Recepie_description</label>
+        <textarea name="recepies_description" class="form-control" required>{{recepie.recepies_description}}</textarea>  
+    </div>
+    <div class="mb-3">
+        <label for="recepie_image" class="form-label  text-danger">Recepie_Image</label>
+        <input type="file" name="recepie_image" class="form-control">
+    </div>
+    <button type="submit" class="btn btn-custom">Submit</button>
+</form>
+
+
+</div>
+
+{% endblock %}

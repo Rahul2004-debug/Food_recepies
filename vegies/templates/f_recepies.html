@@ -1,0 +1,127 @@
+
+{% extends "base.html" %}
+{% block start %}
+{% load static %}
+
+<style >
+     body {
+             background-image: url("{% static 'recepie/bgimage.jpg' %}");
+            background-size: cover;
+            background-repeat: repeat;
+            background-position: center;
+           
+        }
+    .card
+    {
+    background-color: rgba(255, 255, 255, 0.95);  /* or 0.85 for more transparency */
+    border-radius: 15px;
+       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+    .btn-custom {
+    background: linear-gradient(45deg, #ff416c, #ff4b2b);
+    color: white;
+    border: none;
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+}
+.btn-custom:hover {
+    opacity: 0.9;
+}
+
+ table {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    background: rgba(255, 255, 255, 0.55); /* White with 75% opacity */
+  }
+
+  .transparent-table-card {
+    background-color: rgba(255, 255, 255, 0.95);  /* White with 95% opacity */
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    padding: 20px;
+    margin-top: 30px;
+  }
+
+
+
+  tbody tr:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+  }
+
+  form:hover {
+  transform: scale(1.03); /* Slightly enlarges the form */
+  transition: transform 1s ease; /* Smooth animation */
+}
+
+   
+</style>
+<div class="container">
+    <form method="post" enctype="multipart/form-data" class="col-6 mx-auto card mt-5 p-3 shadow-lg">
+    {% csrf_token %}
+    <h2 class="text-center text-danger">Add Food_recepies</h2>
+    <hr>
+    <div class="mb-3">
+        <label for="recepie_name" class="form-label ">Recepie_name</label>
+        <input type="text" name="recepie_name" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label for="recepie_description" class="form-label">Recepie_description</label>
+        <textarea name="recepie_description" class="form-control" required></textarea>  
+    </div>
+    <div class="mb-3">
+        <label for="recepie_image" class="form-label ">Recepie_Image</label>
+        <input type="file" name="recepie_image" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-custom">Submit</button>
+    </form>
+    <form action="">
+        <div class="col-6 mx-auto card mt-5 p-3 shadow-lg">
+            <h2 class="text-center text-danger">Search for Food_recepies</h2>
+            <hr>
+            <div>
+                <label for="recepies_name" class="form-label " style="color: red;"></label>
+                <input type="text" name="search" id="recepies_name" class="form-control mb-3" placeholder="Search by recepie name" style="border: 1px  solid red;">
+            </div>
+            <button type="submit" class="btn btn-danger col-6 mx-auto ">
+            Search
+        </button>
+        </div>
+    </form>
+
+
+</div>
+
+    <div class="col-12 mt-5">
+        <table class="container table table-striped mt-5 shadow-lg transparent-table-card">
+      <thead>
+        <tr>
+          <th style="color: red;"  style="color: red;" scope="col">SI.no</th>1
+          <th style="color: red;" scope="col">recepie_name</th>
+          <th style="color: red;" scope="col">recepie_description</th>
+          <th style="color: red;" scope="col">recepie_image</th>
+          <th style="color: red;" scope="col">Action</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        {% for recepie in recepies %}
+        <tr>
+          <th scope="row">{{forloop.counter}}</th>
+          <td>{{recepie.recepies_name}}</td>
+          <td>{{recepie.recepies_description}}</td>
+          <td><img src="/media/{{recepie.recepies_image}}" style="height:100px" width="80px">
+          </td>
+          <td class="d-flex gap-2 align-items-center justify-content-center">
+            <a   href="/delete_recepies/{{recepie.id}}" class="btn btn-danger">Delete</a>
+             <a  href="/update_recepies/{{recepie.id}}" class="btn btn-success">Update</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </div>
+</div>
+
+{% endblock %}
